@@ -48,9 +48,19 @@ app.get('/restaurants/:restaurant/categories', (req, res) => {
 });
 
 app.get('/restaurants/:restaurant/categories/:category', (req, res) => {
-    console.log(dataManager.getProducts(restaurantsIDs[req.params.restaurant], categoriesIDs[req.params.restaurant + req.params.category]));
+    //console.log(dataManager.getProducts(restaurantsIDs[req.params.restaurant], categoriesIDs[req.params.restaurant + req.params.category]));
     if (categoriesIDs[req.params.restaurant + req.params.category]) {
         res.send(dataManager.getProducts(restaurantsIDs[req.params.restaurant], categoriesIDs[req.params.restaurant + req.params.category]));
+    }
+    else {
+        res.json({ error: 404 });
+    }
+});
+
+app.get('/restaurants/:restaurant/menu', (req, res) => {
+    //console.log(dataManager.getProducts(restaurantsIDs[req.params.restaurant], categoriesIDs[req.params.restaurant + req.params.category]));
+    if (restaurantsIDs[req.params.restaurant]) {
+        res.send(dataManager.getNormalizedCategoriesAndProducts(restaurantsIDs[req.params.restaurant]));
     }
     else {
         res.json({ error: 404 });
@@ -86,7 +96,6 @@ dataManager.getRestaurants().forEach(function (restaurant) {
         categoriesIDs[outR + outC] = category;
     });
 });
-
 /*var rist = [];
 rist = dataManager.getRestaurants();
 console.log(rist);

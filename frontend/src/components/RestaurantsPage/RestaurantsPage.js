@@ -1,7 +1,8 @@
 import React from 'react';
 import 'whatwg-fetch';
+import './RestaurantsPage.scss';
 
-class RestaurantsPage extends React.Component {
+export default class RestaurantsPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { restaurants: [] }
@@ -15,38 +16,46 @@ class RestaurantsPage extends React.Component {
             .then((res) => {
                 return res.json()
             }).then((json) => {
-                //console.log('parsed json', json)
+                console.log('parsed json', json)
                 this.updateState(json);
             })
     }
 
     updateState(restaurants) {
         this.setState({ restaurants: restaurants });
+        console.log(this.state);
     }
 
     render() {
         var restaurantsComponents = this.state.restaurants.map((restaurant) => {
-            return
-            <li>
-                <button
-                    className="restaurant"
-                    key={restaurant}
-                    onClick={() => { this.onButtonClick(restaurant) }}
-                >
-                    {restaurant}
-                </button>
-            </li>;
+            console.log('Rendering...', restaurant);
+            return (
+                <div className="restaurantPanel">
+                    <button
+                        className="restaurantButton"
+                        key={restaurant}
+                        onClick={() => { this.onButtonClick(restaurant) }}
+                    >
+                        {restaurant}
+                    </button>
+                </div>
+            )
         })
 
-        return <ul> {restaurantsComponents}</ul>;
+        return (
+            <section id="RestaurantsPage">
+                {restaurantsComponents}
+            </section>
+        )
     }
 
     onButtonClick(restaurant) {
+        window.location.href = '/#/restaurants/' + this.normalizeName(restaurant);
+    }
+
+    normalizeName(restaurant) {
         var outR = restaurant.replace(/\s/g, '');
         outR = outR.toLowerCase();
-
-        window.location.href = '/#/restaurants/' + outR;
+        return outR;
     }
 }
-
-export default RestaurantsPage;

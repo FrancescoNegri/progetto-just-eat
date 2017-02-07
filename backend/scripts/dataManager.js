@@ -57,6 +57,24 @@ module.exports = class DataManager {
 
         return products;
     }
+
+    static getNormalizedCategoriesAndProducts(restaurant) {
+        var output = {};
+        var categories = this.getCategoriesAndCategoriesDescriptions(restaurant);
+
+        categories.forEach((category) => {
+            var products = this.getProducts(restaurant, category);
+            var categoryID = category['CATEGORY'].replace(/\s/g, '');
+            categoryID = categoryID.toLowerCase();
+            output[categoryID] = [];
+
+            products.forEach((product) => {
+                output[categoryID].push(product);
+            })
+        }, this);
+
+        return output;
+    }
 };
 
 
