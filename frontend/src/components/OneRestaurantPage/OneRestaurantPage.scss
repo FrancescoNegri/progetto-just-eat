@@ -1,31 +1,34 @@
 #OneRestaurantPage {
-    .Collapsible__trigger{
-        color: black;
-        font-size: 25px;
-        font-weight: bold;
-        text-transform: uppercase
-    }
-    .Collapsible__contentInner {
-        font-style: italic;
-        font-size: 18px;
-        color: red;
-    }
-    .menu-product{
-        margin-top: 15px;
-        color:black;
-        font-style: normal;
-        border-bottom: 2px solid;
-        padding-bottom: 10px;
 
-        .product-title{
-            font-size: 18px;
-        }
+  .page-header {
+    text-align: center;
+  }
 
-        .product-description{
-            font-size: 15px;
-            font-style: italic;
-        }
+  .Collapsible__trigger {
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase
+  }
+  .Collapsible__contentInner {
+    font-style: italic;
+    font-size: 18px;
+    color: red;
+  }
+  .menu-product {
+    margin-top: 15px;
+    color: black;
+    font-style: normal;
+    padding-bottom: 10px;
+
+    .product-title {
+      font-size: 18px;
     }
 
-    
+    .product-description {
+      font-size: 15px;
+      font-style: italic;
+    }
+  }
+
 }

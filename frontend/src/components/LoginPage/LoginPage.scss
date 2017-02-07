@@ -1,0 +1,24 @@
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+#LoginPage {
+
+  text-align: center;
+
+  .panel {
+    text-align: center;
+
+    input, button {
+      display: block;
+      margin: 1% 50%;
+      @include transform(translateX(-50%));
+      max-width: 400px;
+    }
+
+  }
+}

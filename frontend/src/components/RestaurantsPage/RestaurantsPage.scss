@@ -1,13 +1,21 @@
 #RestaurantsPage {
-    
-    text-align: center;
 
-    .restaurantButton{
-        float: left;
-        width: 200px;
-        height: 200px;
-        font-size: 25px;
-        font-weight: bolder;
-        text-transform: uppercase;
+  text-align: center;
+
+  .restaurantsSection {
+    width: 100%;
+    margin: 1% 0 !important;
+
+    .restaurantButton {
+      float: left;
+      margin: 1% 20%;
+      width: 60%;
+      height: 200px;
+      background-color: #337AB7;
+      color: white;
+      font-size: 25px;
+      font-weight: bolder;
+      text-transform: uppercase;
     }
+  }
 }

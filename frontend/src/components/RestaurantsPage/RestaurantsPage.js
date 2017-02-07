@@ -3,11 +3,17 @@ import 'whatwg-fetch';
 import './RestaurantsPage.scss';
 
 export default class RestaurantsPage extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = { restaurants: [] }
+        this.state = {restaurants: []};
         this.updateState = this.updateState.bind(this);
+        this.renderRestaurants = this.renderRestaurants.bind(this);
+    }
 
+    //evento richiamato dopo il mounting dell'elemento sulla pagina
+    //è best practise fare qui le chiamate ajax per il render iniziale
+    componentDidMount() {
         this.getRestaurants();
     }
 
@@ -16,37 +22,44 @@ export default class RestaurantsPage extends React.Component {
             .then((res) => {
                 return res.json()
             }).then((json) => {
-                console.log('parsed json', json)
-                this.updateState(json);
-            })
+            this.updateState(json);
+        })
     }
 
     updateState(restaurants) {
-        this.setState({ restaurants: restaurants });
-        console.log(this.state);
+        this.setState({restaurants: restaurants});
     }
 
     render() {
-        var restaurantsComponents = this.state.restaurants.map((restaurant) => {
-            console.log('Rendering...', restaurant);
-            return (
-                <div className="restaurantPanel">
+        return (
+            <section id="RestaurantsPage">
+                <h1 className="page-header">Seleziona il Ristorante</h1>
+                <section className="restaurantsSection row">
+                    {this.renderRestaurants()}
+                </section>
+            </section>
+        )
+    }
+
+    renderRestaurants() {
+        let restaurants = [];
+
+        this.state.restaurants.map((restaurant) => {
+            restaurants.push(
+                <div className="restaurantPanel col-md-4" key={restaurant}>
                     <button
                         className="restaurantButton"
                         key={restaurant}
-                        onClick={() => { this.onButtonClick(restaurant) }}
-                    >
+                        onClick={() => {
+                            this.onButtonClick(restaurant)
+                        }}>
                         {restaurant}
                     </button>
                 </div>
             )
-        })
+        });
 
-        return (
-            <section id="RestaurantsPage">
-                {restaurantsComponents}
-            </section>
-        )
+        return restaurants;
     }
 
     onButtonClick(restaurant) {
@@ -54,8 +67,8 @@ export default class RestaurantsPage extends React.Component {
     }
 
     normalizeName(restaurant) {
-        var outR = restaurant.replace(/\s/g, '');
-        outR = outR.toLowerCase();
-        return outR;
+        let outR = restaurant.replace(/\s/g, '');
+        return outR.toLowerCase();
     }
+
 }
