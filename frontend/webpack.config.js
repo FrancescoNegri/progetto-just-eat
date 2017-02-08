@@ -10,8 +10,10 @@ const config = {
         publicPath: "/",
     },
     devServer: {
+        headers: { "Access-Control-Allow-Origin": "*" },
         contentBase: "./dist/",
-        inline: true
+        inline: true,
+        host: "0.0.0.0"
     },
     module: {
         loaders: [

@@ -18,7 +18,7 @@ export default class RestaurantsPage extends React.Component {
     }
 
     getRestaurants() {
-        fetch('http://localhost:4000/restaurants')
+        fetch('http://192.168.1.74:4000/restaurants')
             .then((res) => {
                 return res.json()
             }).then((json) => {

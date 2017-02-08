@@ -1,5 +1,4 @@
 var menu = require('../menu.json');
-const _ = require('lodash');
 const items = menu['ITEMS'];
 
 module.exports = class DataManager {

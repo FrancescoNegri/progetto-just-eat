@@ -30,8 +30,13 @@ class LoginPage extends React.Component {
 
     saveName() {
         //Salvare in locale il nome del cliente --> il nome lo mando all'API solamente al momento della conferma ordine
-        console.log('Button pressed');
-        window.location.href = '/#/restaurants';
+        if(this.state.inputText.trim()) {
+            console.log('Button pressed');
+            window.location.href = '/#/restaurants';
+        }
+        else {
+            alert('Devi inserire il tuo nome');
+        }
 
 
         /*
