@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @media (max-width: 767px) {
   .navbar-collapse {
     text-align: center;
@@ -19,4 +20,27 @@
       font-size: 20px !important;
     }
   }
+=======
+@media (max-width: 767px) {
+  .navbar-collapse {
+    text-align: center;
+  }
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.navbar-nav {
+  li a {
+
+    padding: 0 !important;
+
+    p.glyphicon {
+      margin: 13px 0;
+      font-size: 20px !important;
+    }
+  }
+>>>>>>> e40c9739b88565c3a4d0d77e7b1c8a39bd652ad8
 }
