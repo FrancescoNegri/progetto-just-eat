@@ -1,6 +1,7 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
 import 'whatwg-fetch';
+import CartManager from '../../utilities/cartManager';
 import './OneRestaurantPage.scss';
 
 
@@ -8,7 +9,6 @@ export default class OneRestaurantPage extends React.Component {
 
     constructor(props) {
         console.log(props.params.restaurant);
-
         super(props);
         this.state = {
             restaurantID: props.params.restaurant,
@@ -35,7 +35,8 @@ export default class OneRestaurantPage extends React.Component {
     }
 
     addProductToMyCart(product) {
-        alert('Ho aggiunto ' + product['NAME'] + ' al tuo carello!');
+        CartManager.saveItem(product['NAME']);
+        alert('elemento salvato nel carrelo');
     }
 
     updateState(restaurantID, products) {

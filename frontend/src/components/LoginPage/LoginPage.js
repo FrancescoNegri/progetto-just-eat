@@ -29,9 +29,8 @@ class LoginPage extends React.Component {
     }
 
     saveName() {
-        //Salvare in locale il nome del cliente --> il nome lo mando all'API solamente al momento della conferma ordine
-        if(this.state.inputText.trim()) {
-            console.log('Button pressed');
+        if (this.state.inputText.trim()) {
+            window.sessionStorage.setItem('userName', this.state.inputText);
             window.location.href = '/#/restaurants';
         }
         else {
@@ -40,7 +39,7 @@ class LoginPage extends React.Component {
 
 
         /*
-         axios.get('http://localhost:4000/restaurants/' + this.state.inputText)
+         axios.get('http://192.168.1.74:4000/restaurants/' + this.state.inputText)
            .then(function (res) {
              console.log(res.data);
            })
