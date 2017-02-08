@@ -1,0 +1,22 @@
+@media (max-width: 767px) {
+  .navbar-collapse {
+    text-align: center;
+  }
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.navbar-nav {
+  li a {
+
+    padding: 0 !important;
+
+    p.glyphicon {
+      margin: 13px 0;
+      font-size: 20px !important;
+    }
+  }
+}
