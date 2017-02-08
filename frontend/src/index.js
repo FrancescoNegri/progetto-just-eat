@@ -5,6 +5,7 @@ import {Router, Route, IndexRoute, browserHistory, hashHistory} from "react-rout
 import LoginPage from './components/LoginPage/LoginPage';
 import RestaurantsPage from './components/RestaurantsPage/RestaurantsPage';
 import OneRestaurantPage from './components/OneRestaurantPage/OneRestaurantPage';
+import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
 class App extends React.Component {
     render() {
@@ -23,6 +24,7 @@ const cont = (
                 <IndexRoute component={LoginPage}/>
                 <Route path="restaurants" component={RestaurantsPage}/> 
                 <Route path="restaurants/:restaurant" component={OneRestaurantPage}/> 
+                <Route path="checkout" component={CheckoutPage}/>
             </Route>
         </div>
     </Router>

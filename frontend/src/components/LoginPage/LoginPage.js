@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginPage.scss';
 
-class LoginPage extends React.Component {
+export default class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {inputText: ''};
@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
                 <h1 className="page-header">Benvenuto al Progetto Just Eat</h1>
                 <section className="panel">
                     <input className="form-control" type='text' value={ this.state.inputText }
-                           placeholder="inserisci il tuo nome" onChange={ this.updateState }/>
+                           placeholder="inserisci il tuo nome" onChange={ this.updateState } required/>
                     <button className='btn btn-primary' onClick={() => {
                         this.saveName()
                     }}> Invia
@@ -51,5 +51,3 @@ class LoginPage extends React.Component {
          */
     }
 }
-
-export default LoginPage;
