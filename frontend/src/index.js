@@ -21,14 +21,3 @@ const cont = (
 );
 
 ReactDOM.render(cont, document.getElementById("root"));
-
-/*const routes = [{
- path: '/',
- component: App,
- indexRoute: LoginPage,
- childRoutes: [
- { path: 'restaurants', component: RestaurantsPage }
- ]
- }]
-
- ReactDOM.render((<Router history={browserHistory} routes={routes} />), document.getElementById("root"));*/

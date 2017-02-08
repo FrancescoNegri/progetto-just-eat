@@ -35,7 +35,7 @@ export default class OneRestaurantPage extends React.Component {
     }
 
     addProductToMyCart(product) {
-        CartManager.saveItem(product['NAME']);
+        CartManager.saveItem(product);
         alert('elemento salvato nel carrelo');
     }
 
