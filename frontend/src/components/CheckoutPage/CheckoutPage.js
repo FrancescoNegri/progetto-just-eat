@@ -1,4 +1,5 @@
 import React from 'react';
+import CartManager from '../../utilities/cartManager';
 import './CheckoutPage.scss';
 
 export default class CheckoutPage extends React.Component {
@@ -13,10 +14,25 @@ export default class CheckoutPage extends React.Component {
             <div id="CheckoutPage">
                 <h1 className="page-header">Completa il tuo ordine!</h1>
                 <section className="panel">
-                    
+                    <div className="cart">
+                        {this.renderMyCart()}
+                    </div>
                 </section>
             </div>
         )
+    }
+
+    renderMyCart() {
+        let cart = [];
+        CartManager.getItems().map((item) => {
+            console.log(item);
+            const cartItem = (
+                <p>{item["NAME"]}</p>
+            );
+            cart.push(cartItem);
+        });
+
+        return cart;
     }
 
     updateState(event) {
