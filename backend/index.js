@@ -4,12 +4,15 @@ const express = require('express');
 const app = express();
 const menuRender = require('./scripts/menuRender');
 const dataManager = require('./scripts/dataManager.js');
+var bodyParser = require('body-parser');
 
 const port = 4000;
 
 //ROUTING
 
 app.set('view engine', 'pug');
+
+app.use(bodyParser.text());
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -66,6 +69,17 @@ app.get('/restaurants/:restaurant/menu', (req, res) => {
         res.json({ error: 404 });
     }
 });
+
+app.post('/checkout', (req, res) => {
+    order = JSON.parse(req.body);
+    //console.log(order);
+
+    //SALVARE L'ORDINE CARICATO IN UN'APPOSITA CARTELLA TIPO SCONTRINO
+
+    res.setHeader('Content-Type', 'application/json')
+    res.json = {message: "Ordine caricato correttamente!"};
+    res.end();
+})
 
 app.get('/menu', (req, res) => {
     menuRender(res);
