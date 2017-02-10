@@ -26,7 +26,7 @@ export default class OneRestaurantPage extends React.Component {
     }
 
     getMenu(restaurantID) {
-        fetch('http://192.168.1.74:4000/restaurants/' + restaurantID + '/menu')
+        fetch('http://169.254.80.80:4000/restaurants/' + restaurantID + '/menu')
             .then((res) => {
                 return res.json()
             }).then((json) => {

@@ -4,7 +4,10 @@ const express = require('express');
 const app = express();
 const menuRender = require('./scripts/menuRender');
 const dataManager = require('./scripts/dataManager.js');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const ip = require('ip');
+const fs = require('fs');
+const accounting = require('./lib/accounting.js');
 
 const port = 4000;
 
@@ -75,9 +78,52 @@ app.post('/checkout', (req, res) => {
     //console.log(order);
 
     //SALVARE L'ORDINE CARICATO IN UN'APPOSITA CARTELLA TIPO SCONTRINO
+    var currentdate = new Date();
+    var datetime = currentdate.getDate() + ""
+        + (currentdate.getMonth() + 1) + ""
+        + currentdate.getFullYear() + "-"
+        + currentdate.getHours()
+        + currentdate.getMinutes()
+        + currentdate.getSeconds() + "-";
 
+    var bill = {};
+    var total = 0;
+    var cart = [];
+    order["cart"].forEach((item) => {
+        obj = { PRODUCT: item['NAME'], PRICE: item['PRICE'] };
+        cart.push(obj);
+        num = (item['PRICE'].trim().replace('€', ""));
+        total += parseFloat(num.replace(',', '.').replace(' ', ''));
+    });
+    bill['CLIENT'] = order['id'];
+    bill['CART'] = cart;
+    accounting.settings = {
+        currency: {
+            symbol: "€",   // default currency symbol is '$'
+            format: "%s%v", // controls output: %s = symbol, %v = value/number (can be object: see below)
+            decimal: ",",  // decimal point separator
+            thousand: ".",  // thousands separator
+            precision: 2   // decimal places
+        },
+        number: {
+            precision: 0,  // default precision on numbers is 0
+            thousand: ",",
+            decimal: "."
+        }
+    }
+    accounting.formatMoney(total)
+    bill['TOTAL'] = accounting.formatMoney(total).toString();
+    fs.writeFile("./bills/" + datetime + order['id'] + '.json', JSON.stringify(bill), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log("Saved order by", order['id'] + '!');
+    });
+
+    //RESPONSE
     res.setHeader('Content-Type', 'application/json')
-    res.json = {message: "Ordine caricato correttamente!"};
+    res.json = { message: "Ordine caricato correttamente!" };
     res.end();
 })
 
@@ -109,6 +155,14 @@ dataManager.getRestaurants().forEach(function (restaurant) {
         outC = outC.toLowerCase();
         categoriesIDs[outR + outC] = category;
     });
+});
+
+fs.writeFile("../myIp.txt", ip.address().toString(), function (err) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log("My IP is:", ip.address());
 });
 /*var rist = [];
 rist = dataManager.getRestaurants();

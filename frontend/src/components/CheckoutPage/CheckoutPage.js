@@ -29,8 +29,8 @@ export default class CheckoutPage extends React.Component {
         var myId = window.sessionStorage.getItem('userName');
 
         var payload = { id: myId, cart: myCart };
-
-        fetch('http://192.168.1.74:4000/checkout',
+        //Cambiare con myiP dinamico!!
+        fetch('http://169.254.80.80:4000/checkout',
             {
                 method: 'POST',
                 body: JSON.stringify(payload)

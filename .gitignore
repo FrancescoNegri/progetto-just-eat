@@ -47,4 +47,6 @@ Temporary Items
 .vscode/
 .idea/
 dist/
+bills/
 credentials.js
+*.txt
