@@ -86,6 +86,9 @@ app.post('/checkout', (req, res) => {
         + currentdate.getMinutes()
         + currentdate.getSeconds() + "-";
 
+
+    const fee = 5;
+
     var bill = {};
     var total = 0;
     var cart = [];
@@ -111,8 +114,8 @@ app.post('/checkout', (req, res) => {
             decimal: "."
         }
     }
-    accounting.formatMoney(total)
-    bill['TOTAL'] = accounting.formatMoney(total).toString();
+    bill['FEE'] = accounting.formatMoney(fee).toString();
+    bill['TOTAL'] = accounting.formatMoney(total + fee).toString();
     fs.writeFile("./bills/" + datetime + order['id'] + '.json', JSON.stringify(bill), function (err) {
         if (err) {
             return console.log(err);
