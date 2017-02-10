@@ -6,6 +6,8 @@ export default class LoginPage extends React.Component {
         super(props);
         this.state = {inputText: ''};
         this.updateState = this.updateState.bind(this);
+
+        window.sessionStorage.clear();
     }
 
     render() {
