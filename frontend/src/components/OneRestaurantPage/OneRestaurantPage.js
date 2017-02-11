@@ -7,9 +7,7 @@ import startupData from '../../../../shared/startupData.json';
 
 
 export default class OneRestaurantPage extends React.Component {
-
     constructor(props) {
-        console.log(props.params.restaurant);
         super(props);
         this.state = {
             restaurantID: props.params.restaurant,
