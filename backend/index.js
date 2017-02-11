@@ -160,6 +160,10 @@ dataManager.getRestaurants().forEach(function (restaurant) {
     });
 });
 
+//Crea file e cartella SHARED
+if (!fs.existsSync('../shared')){
+    fs.mkdirSync('../shared');
+}
 fs.writeFile("../shared/startupData.json", JSON.stringify({ip: ip.address().toString()}), function (err) {
     if (err) {
         return console.log(err);
