@@ -2,6 +2,7 @@ import React from 'react';
 import CartManager from '../../utilities/cartManager';
 import 'whatwg-fetch';
 import './CheckoutPage.scss';
+import startupData from '../../../../shared/startupData.json';
 
 export default class CheckoutPage extends React.Component {
     constructor(props) {
@@ -27,20 +28,24 @@ export default class CheckoutPage extends React.Component {
     completeOrder() {
         var myCart = CartManager.getItems();
         var myId = window.sessionStorage.getItem('userName');
-
-        var payload = { id: myId, cart: myCart };
-        //Cambiare con myiP dinamico!!
-        fetch('http://169.254.80.80:4000/checkout',
-            {
-                method: 'POST',
-                body: JSON.stringify(payload)
-            })
-            .then((res) => {
-                if (res.status == 200) {
-                    alert('Ordine inviato correttamente!');
-                    //FARE COSE, TIPO APRIRE PAGINA DI CONFERMA ORDINE
-                }
-            })
+        if (myCart.length > 0) {
+            var payload = { id: myId, cart: myCart };
+            //Cambiare con myiP dinamico!!
+            fetch('http://' + startupData['ip'] + ':4000/checkout',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                })
+                .then((res) => {
+                    if (res.status == 200) {
+                        alert('Ordine inviato correttamente!');
+                        //FARE COSE, TIPO APRIRE PAGINA DI CONFERMA ORDINE
+                    }
+                })
+        }
+        else {
+            alert('Carrello vuoto!');
+        }
     }
 
     renderMyCart() {

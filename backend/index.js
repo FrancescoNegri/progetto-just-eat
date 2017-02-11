@@ -160,13 +160,14 @@ dataManager.getRestaurants().forEach(function (restaurant) {
     });
 });
 
-fs.writeFile("../myIp.txt", ip.address().toString(), function (err) {
+fs.writeFile("../shared/startupData.json", JSON.stringify({ip: ip.address().toString()}), function (err) {
     if (err) {
         return console.log(err);
     }
 
     console.log("My IP is:", ip.address());
 });
+
 /*var rist = [];
 rist = dataManager.getRestaurants();
 console.log(rist);

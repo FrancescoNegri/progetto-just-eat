@@ -1,6 +1,7 @@
 import React from 'react';
 import 'whatwg-fetch';
 import './RestaurantsPage.scss';
+import startupData from '../../../../shared/startupData.json';
 
 export default class RestaurantsPage extends React.Component {
 
@@ -18,7 +19,7 @@ export default class RestaurantsPage extends React.Component {
     }
 
     getRestaurants() {
-        fetch('http://169.254.80.80:4000/restaurants')
+        fetch('http://' + startupData['ip'] + ':4000/restaurants')
             .then((res) => {
                 return res.json()
             }).then((json) => {

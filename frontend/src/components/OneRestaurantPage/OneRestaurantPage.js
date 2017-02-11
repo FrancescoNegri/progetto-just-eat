@@ -3,6 +3,7 @@ import Collapsible from 'react-collapsible';
 import 'whatwg-fetch';
 import CartManager from '../../utilities/cartManager';
 import './OneRestaurantPage.scss';
+import startupData from '../../../../shared/startupData.json';
 
 
 export default class OneRestaurantPage extends React.Component {
@@ -26,7 +27,7 @@ export default class OneRestaurantPage extends React.Component {
     }
 
     getMenu(restaurantID) {
-        fetch('http://169.254.80.80:4000/restaurants/' + restaurantID + '/menu')
+        fetch('http://' + startupData['ip'] + ':4000/restaurants/' + restaurantID + '/menu')
             .then((res) => {
                 return res.json()
             }).then((json) => {
