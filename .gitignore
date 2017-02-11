@@ -48,5 +48,6 @@ Temporary Items
 .idea/
 dist/
 bills/
+shared/
 credentials.js
 *.txt
