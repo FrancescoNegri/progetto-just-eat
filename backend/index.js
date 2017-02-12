@@ -116,6 +116,9 @@ app.post('/checkout', (req, res) => {
     }
     bill['FEE'] = accounting.formatMoney(fee).toString();
     bill['TOTAL'] = accounting.formatMoney(total + fee).toString();
+    if (!fs.existsSync('./bills')){
+        fs.mkdirSync('./bills');
+    }
     fs.writeFile("./bills/" + datetime + order['id'] + '.json', JSON.stringify(bill), function (err) {
         if (err) {
             return console.log(err);
