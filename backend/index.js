@@ -8,15 +8,12 @@ const bodyParser = require('body-parser');
 const ip = require('ip');
 const fs = require('fs');
 const accounting = require('./lib/accounting.js');
-
+const fee = 5;
 const port = 4000;
-
-//ROUTING
 
 app.set('view engine', 'pug');
 
 app.use(bodyParser.text());
-
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -35,7 +32,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-
+//ROUTING
 app.get('/', (req, res) => {
     res.render('index', { title: 'TEST', message: 'Benvenuto nel nostro test!' });
 });
@@ -47,6 +44,16 @@ app.get('/restaurants', (req, res) => {
 
 app.get('/restaurants/:restaurant', (req, res) => {
     res.send(dataManager.getCategoriesAndCategoriesDescriptions(restaurantsIDs[req.params.restaurant]));
+});
+
+app.get('/restaurants/:restaurant/menu', (req, res) => {
+    //console.log(dataManager.getProducts(restaurantsIDs[req.params.restaurant], categoriesIDs[req.params.restaurant + req.params.category]));
+    if (restaurantsIDs[req.params.restaurant]) {
+        res.send(dataManager.getNormalizedCategoriesAndProducts(restaurantsIDs[req.params.restaurant]));
+    }
+    else {
+        res.json({ error: 404 });
+    }
 });
 
 app.get('/restaurants/:restaurant/categories', (req, res) => {
@@ -63,21 +70,11 @@ app.get('/restaurants/:restaurant/categories/:category', (req, res) => {
     }
 });
 
-app.get('/restaurants/:restaurant/menu', (req, res) => {
-    //console.log(dataManager.getProducts(restaurantsIDs[req.params.restaurant], categoriesIDs[req.params.restaurant + req.params.category]));
-    if (restaurantsIDs[req.params.restaurant]) {
-        res.send(dataManager.getNormalizedCategoriesAndProducts(restaurantsIDs[req.params.restaurant]));
-    }
-    else {
-        res.json({ error: 404 });
-    }
-});
-
 app.post('/checkout', (req, res) => {
     order = JSON.parse(req.body);
     //console.log(order);
 
-    //SALVARE L'ORDINE CARICATO IN UN'APPOSITA CARTELLA TIPO SCONTRINO
+    //BILLING
     var currentdate = new Date();
     var datetime = currentdate.getDate() + ""
         + (currentdate.getMonth() + 1) + ""
@@ -85,9 +82,6 @@ app.post('/checkout', (req, res) => {
         + currentdate.getHours()
         + currentdate.getMinutes()
         + currentdate.getSeconds() + "-";
-
-
-    const fee = 5;
 
     var bill = {};
     var total = 0;
@@ -138,7 +132,7 @@ app.get('/menu', (req, res) => {
 })
 
 app.all('*', (req, res) => {
-    res.sendfile('./src/notfound.json');
+    res.json({ERROR: 404});
 })
 
 app.listen(port, () => {
@@ -174,14 +168,6 @@ fs.writeFile("../shared/startupData.json", JSON.stringify({ip: ip.address().toSt
 
     console.log("My IP is:", ip.address());
 });
-
-/*var rist = [];
-rist = dataManager.getRestaurants();
-console.log(rist);
-var categ = dataManager.getCategoriesAndCategoriesDescriptions(rist[0]);
-categ.forEach(function(c) {
-    console.log(dataManager.getProducts(rist[0], c));
-})*/
 
 
 

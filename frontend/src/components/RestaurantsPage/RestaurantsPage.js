@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import 'whatwg-fetch';
 import './RestaurantsPage.scss';
@@ -18,19 +20,7 @@ export default class RestaurantsPage extends React.Component {
         this.getRestaurants();
     }
 
-    getRestaurants() {
-        fetch('http://' + startupData['ip'] + ':4000/restaurants')
-            .then((res) => {
-                return res.json()
-            }).then((json) => {
-            this.updateState(json);
-        })
-    }
-
-    updateState(restaurants) {
-        this.setState({restaurants: restaurants});
-    }
-
+    //RENDERING
     render() {
         return (
             <section id="RestaurantsPage">
@@ -61,6 +51,20 @@ export default class RestaurantsPage extends React.Component {
         });
 
         return restaurants;
+    }
+    //FINE RENDERING
+
+    getRestaurants() {
+        fetch('http://' + startupData['ip'] + ':4000/restaurants')
+            .then((res) => {
+                return res.json()
+            }).then((json) => {
+            this.updateState(json);
+        })
+    }
+
+    updateState(restaurants) {
+        this.setState({restaurants: restaurants});
     }
 
     onButtonClick(restaurant) {

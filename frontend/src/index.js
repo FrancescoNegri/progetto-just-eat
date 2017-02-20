@@ -17,6 +17,7 @@ const cont = (
             <Route path="restaurants/:restaurant" component={OneRestaurantPage}/>
             <Route path="checkout" component={CheckoutPage}/>
         </Route>
+        <Route path="*" component={() => {window.location = '/'}}/>
     </Router>
 );
 

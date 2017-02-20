@@ -13,7 +13,7 @@ export default class LoginPage extends React.Component {
     render() {
         return (
             <div id="LoginPage">
-                <h1 className="page-header">Benvenuto al Progetto Just Eat</h1>
+                <h1 className="page-header">Benvenuto!</h1>
                 <section className="panel">
                     <input className="form-control" type='text' value={ this.state.inputText }
                            placeholder="inserisci il tuo nome" onChange={ this.updateState }/>
