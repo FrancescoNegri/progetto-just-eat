@@ -12,9 +12,31 @@ export default class CartManager {
         items.push(item);
         const cart = JSON.stringify(items);
         window.sessionStorage.setItem('cart', cart);
+        this.saveTotalPrice();
     }
 
-    static deleteItem(id) {
+    static saveTotalPrice() {
+        let items = this.getItems();
+        let total = 0;
+        items.map(item => {
+            const price = parseFloat(item["PRICE"].split(' ')[2].replace(',', '.'));
+            total += price;
+        });
+        window.sessionStorage.setItem('total', total);
+        return total;
+    }
+
+    static deleteItem(index) {
+
+        const prom = new Promise(resolve => {
+            let items = this.getItems();
+            const newItems = items.filter((item, i) => i != index);
+            window.sessionStorage.setItem('cart', JSON.stringify(newItems));
+            const totalPrice = this.saveTotalPrice();
+            resolve({newItems, totalPrice});
+        });
+
+        return prom;
 
     }
 

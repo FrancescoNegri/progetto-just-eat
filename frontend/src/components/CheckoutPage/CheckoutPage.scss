@@ -1,0 +1,40 @@
+$itemBorder: 1px solid lightgray;
+$itemFontSize: 25px;
+
+#CheckoutPage {
+  text-align: center;
+  padding: 1% 20%;
+
+  .heading span {
+    font-size: $itemFontSize;
+  }
+
+  .ordersList {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      font-size: $itemFontSize;
+      border-bottom: $itemBorder;
+      margin: 0.5%;
+    }
+
+  }
+
+  .orderRow {
+
+    padding: 0 20%;
+
+    h3 {
+      font-size: 27px;
+      float: left;
+    }
+
+    button {
+      float: right;
+      font-size: 20px;
+      transform: translateY(30%);
+    }
+  }
+
+}

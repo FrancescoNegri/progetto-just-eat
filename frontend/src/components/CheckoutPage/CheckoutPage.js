@@ -7,29 +7,51 @@ import startupData from '../../../../shared/startupData.json';
 export default class CheckoutPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { myCart: '' };
+        this.state = {
+            myCart: '',
+            totalPrice: window.sessionStorage.getItem('total')
+        };
         this.updateState = this.updateState.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.renderMyCart = this.renderMyCart.bind(this);
     }
 
     render() {
         return (
             <div id="CheckoutPage">
                 <h1 className="page-header">Completa il tuo ordine!</h1>
-                <section className="panel">
-                    <div className="cart">
-                        {this.renderMyCart()}
-                    </div>
-                    <button onClick={() => { this.completeOrder() }}>ORDINA</button>
-                </section>
+                <div className="row heading">
+                    <span className="col-sm-4">Prodotto</span>
+                    <span className="col-sm-4">Ristorante</span>
+                    <span className="col-sm-3">Prezzo</span>
+                </div>
+                <hr/>
+                <div className="cart">
+                    {this.renderMyCart()}
+                </div>
+                <div className="orderRow">
+                    <h3>TOTALE: {this.state.totalPrice} €</h3>
+                    <button onClick={this.completeOrder} className="btn btn-primary">ORDINA
+                    </button>
+                </div>
             </div>
         )
     }
 
+    deleteItem(index) {
+        CartManager.deleteItem(index)
+            .then((data) => {
+                const {myCart, totalPrice} = data;
+                console.log(totalPrice);
+                this.setState({myCart, totalPrice})
+            });
+    }
+
     completeOrder() {
-        var myCart = CartManager.getItems();
-        var myId = window.sessionStorage.getItem('userName');
+        const myCart = CartManager.getItems();
+        const myId = window.sessionStorage.getItem('userName');
         if (myCart.length > 0) {
-            var payload = { id: myId, cart: myCart };
+            const payload = {id: myId, cart: myCart};
             //Cambiare con myiP dinamico!!
             fetch('http://' + startupData['ip'] + ':4000/checkout',
                 {
@@ -50,17 +72,23 @@ export default class CheckoutPage extends React.Component {
 
     renderMyCart() {
         let cart = [];
-        CartManager.getItems().map((item) => {
+
+        CartManager.getItems().map((item, i) => {
             const cartItem = (
-                <p>{item["NAME"]}</p>
+                <li key={i} className="row">
+                    <span className="col-sm-4">{item["NAME"]}</span>
+                    <span className="col-sm-4">{item["RESTAURANT"]}</span>
+                    <span className="col-sm-3">{item["PRICE"]}</span>
+                    <span className="col-sm-1 glyphicon glyphicon-trash" onClick={() => this.deleteItem(i)}/>
+                </li>
             );
             cart.push(cartItem);
         });
 
-        return cart;
+        return (<ul className="ordersList">{cart}</ul>);
     }
 
     updateState(event) {
-        this.setState({ inputText: event.target.value });
+        this.setState({inputText: event.target.value});
     }
 }

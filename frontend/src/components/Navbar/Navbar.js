@@ -19,6 +19,11 @@ export default class Navbar extends React.Component {
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav navbar-right">
                             <li>
+                                <a href="#/restaurants">
+                                    <p className="glyphicon glyphicon-home"></p>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="#/checkout">
                                     <p className="glyphicon glyphicon-shopping-cart"></p>
                                 </a>
