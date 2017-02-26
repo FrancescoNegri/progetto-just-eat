@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const ip = require('ip');
 const fs = require('fs');
 const accounting = require('./lib/accounting.js');
-const fee = 5;
+const fee = 3;
 const port = 4000;
 
 app.set('view engine', 'pug');
@@ -35,6 +35,10 @@ app.use(function (req, res, next) {
 //ROUTING
 app.get('/', (req, res) => {
     res.render('index', { title: 'TEST', message: 'Benvenuto nel nostro test!' });
+});
+
+app.get('/fee', (req, res) => {
+    res.send({fee: fee});
 });
 
 app.get('/restaurants', (req, res) => {
