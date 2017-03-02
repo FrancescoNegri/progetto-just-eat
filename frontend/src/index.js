@@ -8,16 +8,24 @@ import RestaurantsPage from './components/RestaurantsPage/RestaurantsPage';
 import OneRestaurantPage from './components/OneRestaurantPage/OneRestaurantPage';
 import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 
+const resetState = () => {
+    if (document.getElementById("collapse")) {
+        document.getElementById("collapse").classList.remove("in");
+    }
+    window.scrollTo(0, 0);
+};
 
 const cont = (
-    <Router history={hashHistory}>
+    <Router history={hashHistory} onUpdate={resetState}>
         <Route path="/" component={LoginPage}/>
         <Route path="/" component={App}>
             <Route path="restaurants" component={RestaurantsPage}/>
             <Route path="restaurants/:restaurant" component={OneRestaurantPage}/>
             <Route path="checkout" component={CheckoutPage}/>
         </Route>
-        <Route path="*" component={() => {window.location = '/'}}/>
+        <Route path="*" component={() => {
+            window.location = '/'
+        }}/>
     </Router>
 );
 
