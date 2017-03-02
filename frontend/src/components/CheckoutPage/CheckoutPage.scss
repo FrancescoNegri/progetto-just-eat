@@ -1,5 +1,6 @@
 $itemBorder: 1px solid lightgray;
 $itemFontSize: 25px;
+$itemFontSizeMobile: 15px;
 
 #CheckoutPage {
   text-align: center;
@@ -35,6 +36,37 @@ $itemFontSize: 25px;
       font-size: 20px;
       transform: translateY(30%);
     }
+  }
+
+  @media (max-width: 767px) {
+
+    padding: 0;
+
+    .heading span {
+      font-size: $itemFontSizeMobile;
+    }
+
+    .orderRow {
+      padding: 5%;
+    }
+
+    .orderRow h3 {
+      font-size: $itemFontSizeMobile*3/2;
+    }
+
+    .orderRow button {
+      font-size: $itemFontSizeMobile;
+    }
+
+    .ordersList li {
+      font-size: $itemFontSizeMobile*6/5;
+    }
+
+    .ordersList li span{
+      font-size: $itemFontSizeMobile;
+      padding:  1% 0;
+    }
+
   }
 
 }

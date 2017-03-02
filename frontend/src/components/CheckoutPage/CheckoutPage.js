@@ -35,7 +35,8 @@ export default class CheckoutPage extends React.Component {
                     {this.renderMyCart()}
                 </div>
                 <div className="orderRow">
-                    <h3>TOTALE: {(this.formatMoney(Number.parseFloat(this.state.totalPrice) + Number.parseFloat(this.state.fee))).replace(/€/g, '€ ')}</h3>
+                    <h3>
+                        TOTALE: {(this.formatMoney(Number.parseFloat(this.state.totalPrice) + Number.parseFloat(this.state.fee))).replace(/€/g, '€ ')}</h3>
                     <button onClick={this.completeOrder} className="btn btn-primary">ORDINA
                     </button>
                 </div>
@@ -68,8 +69,8 @@ export default class CheckoutPage extends React.Component {
             .then((res) => {
                 return res.json()
             }).then((json) => {
-                this.updateState(json['fee']);
-            })
+            this.updateState(json['fee']);
+        })
     }
 
     deleteItem(index) {
@@ -77,7 +78,7 @@ export default class CheckoutPage extends React.Component {
             .then((data) => {
                 const {myCart, totalPrice} = data;
                 console.log(totalPrice);
-                this.setState({ myCart, totalPrice })
+                this.setState({myCart, totalPrice})
             });
     }
 
@@ -85,7 +86,7 @@ export default class CheckoutPage extends React.Component {
         const myCart = CartManager.getItems();
         const myId = window.sessionStorage.getItem('userName');
         if (myCart.length > 0) {
-            const payload = { id: myId, cart: myCart };
+            const payload = {id: myId, cart: myCart};
             //Cambiare con myiP dinamico!!
             fetch('http://' + startupData['ip'] + ':4000/checkout',
                 {
@@ -110,10 +111,10 @@ export default class CheckoutPage extends React.Component {
         CartManager.getItems().map((item, i) => {
             const cartItem = (
                 <li key={i} className="row">
-                    <span className="col-sm-4">{item["NAME"]}</span>
-                    <span className="col-sm-4">{item["RESTAURANT"]}</span>
-                    <span className="col-sm-3">{item["PRICE"]}</span>
-                    <span className="col-sm-1 glyphicon glyphicon-trash" onClick={() => this.deleteItem(i)} />
+                    <span className="col-xs-4 col-md-4">{item["NAME"]}</span>
+                    <span className="col-xs-4 col-md-4">{item["RESTAURANT"]}</span>
+                    <span className="col-xs-2 col-md-3">{item["PRICE"]}</span>
+                    <span className="col-xs-2 col-md-1 glyphicon glyphicon-trash" onClick={() => this.deleteItem(i)}/>
                 </li>
             );
             cart.push(cartItem);
@@ -122,16 +123,19 @@ export default class CheckoutPage extends React.Component {
         const fee = (
             <li key='fee' className="row">
                 <span className="col-sm-4" style={{fontStyle: 'italic', opacity: '0.5'}}>fee</span>
-                <span className="col-sm-4"></span>
-                <span className="col-sm-3" style={{fontStyle: 'italic', opacity: '0.5'}}>{this.formatMoney(Number.parseFloat(this.state.fee)).replace(/€/g, '€ ')}</span>
+                <span className="col-sm-4"/>
+                <span className="col-sm-3" style={{
+                    fontStyle: 'italic',
+                    opacity: '0.5'
+                }}>{this.formatMoney(Number.parseFloat(this.state.fee)).replace(/€/g, '€ ')}</span>
             </li>
         );
-        cart.push(fee)
+        cart.push(fee);
 
         return (<ul className="ordersList">{cart}</ul>);
     }
 
     updateState(fee) {
-        this.setState({ fee: fee });
+        this.setState({fee: fee});
     }
 }
