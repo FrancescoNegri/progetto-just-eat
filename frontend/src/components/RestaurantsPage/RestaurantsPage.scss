@@ -17,5 +17,12 @@
       font-weight: bolder;
       text-transform: uppercase;
     }
+
+    @media (max-width: 767px) {
+      .restaurantButton {
+        width: 70%;
+        margin: 10% 15%;
+      }
+    }
   }
 }

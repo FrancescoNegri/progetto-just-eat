@@ -20,12 +20,14 @@ export default class Navbar extends React.Component {
                         <ul className="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#/restaurants">
-                                    <p className="glyphicon glyphicon-home"></p>
+                                    <span>Ristoranti</span>
+                                    <p className="glyphicon glyphicon-cutlery"/>
                                 </a>
                             </li>
                             <li>
                                 <a href="#/checkout">
-                                    <p className="glyphicon glyphicon-shopping-cart"></p>
+                                    <span>Carrello</span>
+                                    <p className="glyphicon glyphicon-shopping-cart"/>
                                 </a>
                             </li>
                         </ul>

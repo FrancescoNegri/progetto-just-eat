@@ -20,4 +20,21 @@
       max-width: 400px;
     }
   }
+
+  @media (max-width: 767px) {
+    padding: 3%;
+
+    .panel {
+      input, button {
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      button{
+        font-size: 15px;
+      }
+
+    }
+
+  }
 }

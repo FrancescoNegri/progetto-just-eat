@@ -69,7 +69,8 @@ const config = {
                 "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
             ],
             scripts: [
-                "https://code.jquery.com/jquery-3.1.1.slim.min.js"
+                "https://code.jquery.com/jquery-3.1.1.slim.min.js",
+                "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             ],
         }),
         new ExtractTextPlugin("styles.css"),

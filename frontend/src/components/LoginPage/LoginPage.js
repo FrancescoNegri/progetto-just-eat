@@ -13,10 +13,10 @@ export default class LoginPage extends React.Component {
     render() {
         return (
             <div id="LoginPage">
-                <h1 className="page-header">Benvenuto! TODO: pagina success invio ordine!!!!</h1>
+                <h1 className="page-header">Benvenuto!</h1>
                 <section className="panel">
                     <input className="form-control" type='text' value={ this.state.inputText }
-                           placeholder="inserisci il tuo nome" onChange={ this.updateState }/>
+                           placeholder="Inserisci il tuo nome" onChange={ this.updateState }/>
                     <button className='btn btn-primary' onClick={() => {
                         this.saveName()
                     }}> Invia
