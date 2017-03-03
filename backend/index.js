@@ -91,7 +91,7 @@ app.post('/checkout', (req, res) => {
     var total = 0;
     var cart = [];
     order["cart"].forEach((item) => {
-        obj = { PRODUCT: item['NAME'], PRICE: item['PRICE'] };
+        obj = { PRODUCT: item['NAME'], RESTAURANT: item['RESTAURANT'], PRICE: item['PRICE'] };
         cart.push(obj);
         num = (item['PRICE'].trim().replace('€', ""));
         total += parseFloat(num.replace(',', '.').replace(' ', ''));

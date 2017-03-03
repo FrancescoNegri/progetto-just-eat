@@ -14,7 +14,7 @@ export default class Navbar extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className='navbar-brand' href='/'>{window.sessionStorage.getItem('userName')}</a>
+                        <a className='navbar-brand' onClick={() => this.getHome()}>{window.sessionStorage.getItem('userName')}</a>
                     </div>
                     <div className="navbar-collapse collapse" id="collapse">
                         <ul className="nav navbar-nav navbar-right">
@@ -35,6 +35,12 @@ export default class Navbar extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    getHome() {
+        if (confirm('Vuoi davvero uscire?') ) {
+            window.location = '/';
+        }
     }
 
 }
