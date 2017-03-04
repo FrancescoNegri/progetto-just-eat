@@ -23,7 +23,6 @@
     font-style: normal;
     padding-bottom: 10px;
 
-
     .product-title {
       font-size: 18px;
     }
@@ -33,14 +32,34 @@
       font-style: italic;
     }
 
-    span{
+    span {
       padding-left: 0;
       padding-right: 0;
     }
 
-    .btn-success{
+    .btn-success {
       max-width: 40px;
     }
+  }
+
+}
+
+.alert-success {
+  text-align: center;
+  width: 60%;
+  font-size: 15px;
+  height: 40px;
+  position: fixed;
+  bottom: 0;
+
+  p {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+  }
+
+  @media (max-width: 767px) {
+    width: 93%;
   }
 
 }

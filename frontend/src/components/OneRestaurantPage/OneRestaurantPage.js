@@ -11,7 +11,8 @@ export default class OneRestaurantPage extends React.Component {
         super(props);
         this.state = {
             restaurantID: props.params.restaurant,
-            products: {}
+            products: {},
+            orderCount: 0
         };
         this.updateState = this.updateState.bind(this);
         this.renderCategories = this.renderCategories.bind(this);
@@ -35,7 +36,9 @@ export default class OneRestaurantPage extends React.Component {
 
     addProductToMyCart(product) {
         CartManager.saveItem(product);
-        //alert('elemento salvato nel carrelo');
+        const oldState = this.state;
+        oldState.orderCount += 1;
+        this.setState(oldState);
     }
 
     updateState(restaurantID, products) {
@@ -48,8 +51,20 @@ export default class OneRestaurantPage extends React.Component {
             <section id="OneRestaurantPage">
                 <h1 className="page-header">Seleziona i Prodotti</h1>
                 {this.renderCategories()}
+                {this.renderAlert()}
             </section>
         );
+    }
+
+    renderAlert() {
+        if (this.state.orderCount > 0) {
+            return (
+                <p className="alert-success">
+                    <p> {this.state.orderCount} {(this.state.orderCount == 1) ? "Elemento Aggiunto" : "Elementi Aggiunti"}
+                        Al Carrello</p>
+                </p>)
+        }
+        return null;
     }
 
     renderCategories() {
