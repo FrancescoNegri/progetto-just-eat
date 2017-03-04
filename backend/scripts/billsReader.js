@@ -11,24 +11,32 @@ module.exports = class BillsReader {
                 return;
             }
 
-            var itemsProcessed = 0;
+            if (filenames.length > 0) {
+                var itemsProcessed = 0;
 
-            filenames.forEach(function (filename) {
-                fs.readFile(path.join(dirname, filename), function (err, content) {
-                    if (err) {
-                        onError(err);
-                        return;
-                    }
-                    onFileContent(filename, content);
-                    itemsProcessed++;
-                    if (itemsProcessed === filenames.length) callback();
+                filenames.forEach(function (filename) {
+                    fs.readFile(path.join(dirname, filename), function (err, content) {
+                        if (err) {
+                            onError(err);
+                            return;
+                        }
+                        onFileContent(filename, content);
+                        itemsProcessed++;
+                        if (itemsProcessed === filenames.length) callback();
+                    });
                 });
-            });
+            }
+            else {
+                console.log('no files found');
+            }
         });
     }
 
     static storeData(callback) {
         var data = {};
+        if (!fs.existsSync('./bills')) {
+            fs.mkdirSync('./bills');
+        }
         this.readFiles(path.resolve(__dirname, '../bills/'), function (filename, content) {
             data[filename] = JSON.parse(content);
         }, function (err) {
@@ -60,23 +68,3 @@ module.exports = class BillsReader {
         });
     }
 };
-
-
-//UTILITY FUNCTIONS
-
-var arrayContainsObject = (arr, obj) => {
-    var out;
-    arr.forEach(function (item) {
-        if (jsonEqual(item, obj)) {
-            out = true;
-        }
-    }, this);
-    if (!out) { out = false };
-
-    return out;
-}
-
-
-function jsonEqual(obj1, obj2) {
-    return JSON.stringify(obj1) === JSON.stringify(obj2);
-}
