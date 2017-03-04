@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const menuRender = require('./scripts/menuRender');
 const dataManager = require('./scripts/dataManager.js');
+const billsReader = require('./scripts/billsReader.js');
 const bodyParser = require('body-parser');
 const ip = require('ip');
 const fs = require('fs');
@@ -91,7 +92,7 @@ app.post('/checkout', (req, res) => {
     var total = 0;
     var cart = [];
     order["cart"].forEach((item) => {
-        obj = { PRODUCT: item['NAME'], RESTAURANT: item['RESTAURANT'], PRICE: item['PRICE'] };
+        obj = { PRODUCT: item['NAME'], CATEGORY: item['CATEGORY'], RESTAURANT: item['RESTAURANT'], PRICE: item['PRICE'] };
         cart.push(obj);
         num = (item['PRICE'].trim().replace('€', ""));
         total += parseFloat(num.replace(',', '.').replace(' ', ''));
@@ -135,6 +136,12 @@ app.get('/menu', (req, res) => {
     menuRender(res);
 })
 
+app.get('/admin/orders', (req, res) => {
+    var out = billsReader.getCartsContent((out) => {
+        res.json(out);
+    });
+})
+
 app.all('*', (req, res) => {
     res.json({ERROR: 404});
 })
@@ -172,10 +179,5 @@ fs.writeFile("../shared/startupData.json", JSON.stringify({ip: ip.address().toSt
 
     console.log("My IP is:", ip.address());
 });
-
-
-
-
-
 
 
