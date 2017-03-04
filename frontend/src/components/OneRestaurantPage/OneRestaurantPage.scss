@@ -10,16 +10,19 @@
     font-weight: bold;
     text-transform: uppercase
   }
+
   .Collapsible__contentInner {
     font-style: italic;
     font-size: 18px;
     color: red;
   }
+
   .menu-product {
     margin-top: 15px;
     color: black;
     font-style: normal;
     padding-bottom: 10px;
+
 
     .product-title {
       font-size: 18px;
@@ -29,11 +32,15 @@
       font-size: 15px;
       font-style: italic;
     }
-  }
 
-  button{
-      height: 30px;
-      width: 30px;
+    span{
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .btn-success{
+      max-width: 40px;
+    }
   }
 
 }

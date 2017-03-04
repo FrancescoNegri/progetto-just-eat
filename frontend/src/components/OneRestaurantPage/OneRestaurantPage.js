@@ -80,11 +80,15 @@ export default class OneRestaurantPage extends React.Component {
 
         this.state.products[category].map((product, j) => {
             const prod = (
-                <div className="menu-product" key={j}>
-                    <div className="product-title">{product['NAME']}</div>
-                    <div className="product-description">{product['DESCRIPTION']}</div>
-                    <div className="product-price">{product["PRICE"]}</div>
-                    <button onClick={() => this.addProductToMyCart(product)}>+</button>
+                <div className="menu-product row" key={j}>
+                    <div className="col-xs-6 col-md-10">
+                        <div className="product-title">{product['NAME']}</div>
+                        <div className="product-description">{product['DESCRIPTION']}</div>
+                    </div>
+                    <span className="product-price col-xs-4 col-md-1">{product["PRICE"]}</span>
+                    <span className="btn btn-success col-xs-1" onClick={() => this.addProductToMyCart(product)}>
+                            <span className="glyphicon glyphicon-plus"/>
+                    </span>
                 </div>
             );
             products.push(prod);
