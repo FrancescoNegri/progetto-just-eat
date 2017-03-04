@@ -59,8 +59,9 @@ export default class OneRestaurantPage extends React.Component {
     renderAlert() {
         if (this.state.orderCount > 0) {
             return (
-                <p className="alert-success">
-                    <p> {this.state.orderCount} {(this.state.orderCount == 1) ? "Elemento Aggiunto" : "Elementi Aggiunti"}
+                <p className="alert-success" onClick={ () => window.location = '/#/checkout'}>
+                    <p> {this.state.orderCount}
+                        {(this.state.orderCount == 1) ? " Nuovo Elemento Aggiunto " : " Nuovi Elementi Aggiunti "}
                         Al Carrello</p>
                 </p>)
         }
