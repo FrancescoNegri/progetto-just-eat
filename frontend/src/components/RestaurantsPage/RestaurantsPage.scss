@@ -18,6 +18,14 @@
       text-transform: uppercase;
     }
 
+    @media(max-width: 1024px){
+        .restaurantButton {
+        width: 90%;
+        margin: 10% 5%;
+      } 
+  
+    }
+
     @media (max-width: 767px) {
       .restaurantButton {
         width: 78%;
