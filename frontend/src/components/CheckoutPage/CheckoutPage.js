@@ -95,8 +95,9 @@ export default class CheckoutPage extends React.Component {
                 })
                 .then((res) => {
                     if (res.status == 200) {
-                        alert('Ordine inviato correttamente!');
-                        //FARE COSE, TIPO APRIRE PAGINA DI CONFERMA ORDINE
+                        window.sessionStorage.setItem('cart','[]');
+                        window.sessionStorage.setItem('total','0');
+                        window.location = '/#/completed';
                     }
                 })
         }

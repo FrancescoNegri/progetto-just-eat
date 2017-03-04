@@ -7,6 +7,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RestaurantsPage from './components/RestaurantsPage/RestaurantsPage';
 import OneRestaurantPage from './components/OneRestaurantPage/OneRestaurantPage';
 import CheckoutPage from './components/CheckoutPage/CheckoutPage';
+import EndPage from './components/EndPage/EndPage';
 
 const resetState = () => {
     if (document.getElementById("collapse")) {
@@ -22,6 +23,7 @@ const cont = (
             <Route path="restaurants" component={RestaurantsPage}/>
             <Route path="restaurants/:restaurant" component={OneRestaurantPage}/>
             <Route path="checkout" component={CheckoutPage}/>
+            <Route path="completed" component={EndPage}/>
         </Route>
         <Route path="*" component={() => {
             window.location = '/'
